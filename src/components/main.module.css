@@ -1,0 +1,24 @@
+.fon {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+.sub {
+  text-decoration: none;
+  color: #fff;
+}
+
+.sup {
+  text-decoration: none;
+}
+
+.nav {
+  justify-content: end;
+  align-items: center;
+}
