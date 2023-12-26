@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import { useProducts } from "../../contexts/ProductContextProvider";
 import { useParams } from "react-router-dom";
-import { Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
+import Add from "./Add";
 
 const Details = () => {
   const { getOneProduct, oneProduct, createComment, deleteComment } =
@@ -24,15 +26,31 @@ const Details = () => {
   }
 
   return (
-    <div>
+    <>
+      <Add />
+
       {oneProduct ? (
-        <div>
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "30ch" },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "25%",
+            margin: "10% 0 0 2%",
+            gap: "5px",
+            textAlign: "center",
+          }}
+          noValidate
+          autoComplete="off"
+        >
           <h3>Title: {oneProduct.title}</h3>
           <h3>Description: {oneProduct.description}</h3>
-          <h3>Price: {oneProduct.price}</h3>
+          <h3>Price: {oneProduct.price} $</h3>
           <h3>Category: {oneProduct.category.title}</h3>
           {oneProduct.image ? (
-            <img width={200} src={oneProduct.image} alt={oneProduct.title} />
+            <img width={250} src={oneProduct.image} alt={oneProduct.title} />
           ) : (
             <h3>There is no images here!</h3>
           )}
@@ -72,11 +90,11 @@ const Details = () => {
               </Button>
             </div>
           )}
-        </div>
+        </Box>
       ) : (
         <div>Loading...</div>
       )}
-    </div>
+    </>
   );
 };
 

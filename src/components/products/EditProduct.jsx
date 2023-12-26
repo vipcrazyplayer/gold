@@ -1,4 +1,12 @@
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../contexts/ProductContextProvider";
 import { useNavigate, useParams } from "react-router-dom";
@@ -17,7 +25,7 @@ const EditProduct = () => {
     description: "",
     price: 0,
     category: "",
-    image: "",
+    image: null,
   });
 
   const { id } = useParams();
@@ -36,14 +44,18 @@ const EditProduct = () => {
         description: oneProduct.description,
         price: oneProduct.price,
         category: oneProduct.category.id,
-        image: oneProduct.image,
+        // image: oneProduct.image,
       });
     }
   }, [oneProduct]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewProductObj({ ...newProductObj, [name]: value });
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setNewProductObj({ ...newProductObj, [name]: files[0] });
+    } else {
+      setNewProductObj({ ...newProductObj, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -53,7 +65,9 @@ const EditProduct = () => {
     updatedProduct.append("description", newProductObj.description);
     updatedProduct.append("price", newProductObj.price);
     updatedProduct.append("category", newProductObj.category);
-    updatedProduct.append("image", newProductObj.image);
+    if (newProductObj.image) {
+      updatedProduct.append("image", newProductObj.image);
+    }
 
     saveEditedProduct(id, newProductObj, navigate);
   };
@@ -81,22 +95,22 @@ const EditProduct = () => {
       >
         <h2 className="text-center text-xl font-semibold">Update product</h2>
         <TextField
+          name="title"
           label="Title"
           variant="outlined"
-          name="title"
           value={newProductObj.title}
           onChange={handleChange}
         />
         <TextField
+          name="description"
           label="Description"
           variant="outlined"
-          name="description"
           value={newProductObj.description}
           onChange={handleChange}
         />
         <TextField
-          label="Price"
           name="price"
+          label="Price"
           type="number"
           value={newProductObj.price}
           onChange={handleChange}
@@ -108,14 +122,21 @@ const EditProduct = () => {
             </option>
           ))}
         </select>
-        <TextField
-          label="Image"
-          name="image"
-          type="url"
-          variant="outlined"
-          value={newProductObj.image}
-          onChange={handleChange}
-        />
+        {/* <FormControl sx={{ width: "260px" }}>
+          <InputLabel id="demo-simple-select-label">Category</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Category"
+            onChange={handleChange}
+            name="category"
+          >
+            {categories.map((cat) => (
+              <MenuItem value={cat.id}>{cat.title}</MenuItem>
+            ))}
+          </Select>
+        </FormControl> */}
+
         <Button type="submit" variant="contained">
           Save changes
         </Button>

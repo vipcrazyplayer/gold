@@ -65,7 +65,7 @@ function Navbar() {
   return (
     <>
       <AppBar position="fixed">
-        <Toolbar sx={{ display: "flex", justifyContent: "center", gap: 90 }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "center", gap: 80 }}>
           <Toolbar sx={{ gap: 2 }}>
             <MenuItem onClick={handleProductClose}>
               <NavLink className={style.sub} to={"/"}>

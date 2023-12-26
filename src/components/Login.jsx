@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContextProvder";
 import { useNavigate } from "react-router-dom";
 import Font from "./Font";
-import style from "./main.module.css";
 
 const Login = () => {
   const { error, setError, handleLogin } = useAuth();
