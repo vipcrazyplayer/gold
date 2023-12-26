@@ -1,4 +1,12 @@
-import { Box, Button, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../contexts/ProductContextProvider";
 import { useNavigate } from "react-router-dom";
@@ -98,11 +106,25 @@ const AddProduct = () => {
             </option>
           ))}
         </select>
+        {/* <FormControl sx={{ width: "260px" }}>
+          <InputLabel id="demo-simple-select-label">Category</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Category"
+            onChange={handleChange}
+            name="category"
+          >
+            {categories.map((cat) => (
+              <MenuItem value={cat.id}>{cat.title}</MenuItem>
+            ))}
+          </Select>
+        </FormControl> */}
         <input
           accept="image/*"
           name="image"
-          onChange={handleChange}
           type="file"
+          onChange={handleChange}
         />
         <Button type="submit" variant="contained">
           Add product

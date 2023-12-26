@@ -72,14 +72,16 @@ const Register = () => {
         <TextField
           id="outlined-password-input"
           label="Password"
+          name="password"
           type="password"
           autoComplete="current-password"
           onChange={handleChange}
         />
         <TextField
           id="outlined-basic"
-          name="password_confirm"
           label="Password confirmation"
+          name="password_confirm"
+          type="password"
           variant="outlined"
           onChange={handleChange}
         />
